@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, } from "react";
 import {
-    Box, Modal, Button, Typography, IconButton, Paper, Dialog, DialogContent, Stepper, Step, StepLabel
+    Box, Button, Typography, IconButton, Paper, Stepper, Step, StepLabel
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { Link } from "react-router-dom";
-
-import { isSameDay, addDays } from "date-fns";
 
 import { type Range } from "react-date-range";
 
@@ -15,7 +13,7 @@ import LocationSelector from "../Modals/LocationSelector";
 import Calendar from "../Modals/Calendar";
 import GuestSelector from "../Modals/GuestSelector";
 
-import { formatGuestSummary, getNumberOfNights, getTotalGuests, normalizeDateRange } from "../utils/helper";
+import { getNumberOfNights, getTotalGuests, normalizeDateRange } from "../utils/helper";
 
 export const DEFAULT_DATE_RANGE: Range = {
     startDate: new Date(),
