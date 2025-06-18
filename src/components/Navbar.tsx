@@ -1,35 +1,25 @@
-import React from "react"
 import {
     AppBar,
     Toolbar,
     Typography,
     Button,
     Box,
-    Container,
-    Paper,
     IconButton,
-    Card,
-    CardMedia,
-    CardContent,
-    Chip,
-    Rating,
 } from "@mui/material"
 import {
-    Search as SearchIcon,
     Language as LanguageIcon,
     Menu as MenuIcon,
-    Favorite as FavoriteIcon,
-    FavoriteBorder as FavoriteBorderIcon,
-    ChevronRight as ChevronRightIcon,
+    // Favorite as FavoriteIcon,
+    // FavoriteBorder as FavoriteBorderIcon,
+    // ChevronRight as ChevronRightIcon,
 } from "@mui/icons-material"
-import { red } from "@mui/material/colors"
 import { styled } from "@mui/material/styles"
 
 import { Link } from "react-router-dom"
 
 import SearchBar from "../components/SearchBar"
 
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
+const StyledAppBar = styled(AppBar)(() => ({
     width: "90%",
     margin: "auto",
     backgroundColor: "white",

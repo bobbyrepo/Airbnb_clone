@@ -1,4 +1,3 @@
-import React from "react";
 import { List, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { PropertiesData } from "../airbnb_clone_data_dummy";
 

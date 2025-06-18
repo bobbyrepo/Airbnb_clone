@@ -15,7 +15,6 @@ import PhotoGallerySection from "../components/Property/PhotoGallerySection";
 import PropertyDetails from "../components/Property/PropertyDetails";
 import BookingWidget from "../components/Property/BookingWidget";
 import ReviewsSection from "../components/Property/ReviewsSection";
-import Calendar from "../Modals/Calendar";
 
 const PropertyPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();

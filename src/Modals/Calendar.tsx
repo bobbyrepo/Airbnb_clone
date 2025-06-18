@@ -25,7 +25,6 @@ const Calendar: React.FC<CalendarProps> = ({
 
     useEffect(() => {
         setDateRange(value)
-
     }, [])
 
     return (

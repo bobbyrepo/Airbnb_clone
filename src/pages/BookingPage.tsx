@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { addDays, format, isSameDay } from "date-fns";
+import { format } from "date-fns";
 import {
     Box,
     Typography,
@@ -9,7 +8,6 @@ import {
     CardMedia,
     Button,
     Divider,
-    Link,
     IconButton,
     Chip,
 } from "@mui/material";
@@ -65,16 +63,6 @@ const ContinueButton = styled(Button)({
     },
 });
 
-const EditLink = styled(Link)({
-    color: "#222",
-    textDecoration: "underline",
-    fontSize: "14px",
-    fontWeight: 600,
-    cursor: "pointer",
-    "&:hover": {
-        color: "#FF385C",
-    },
-});
 
 const BookingPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -84,14 +72,8 @@ const BookingPage = () => {
         guestLabel: number;
     };
 
-
-
     const navigate = useNavigate();
     const property = PropertiesData.find((p) => p.id === Number(id));
-
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [countryCode, setCountryCode] = useState("India (+91)");
-
 
     if (!property) {
         return <Typography>Property not found</Typography>;
@@ -120,10 +102,6 @@ const BookingPage = () => {
     const taxes = 216;
     const baseTotal = property.price * nights;
     const total = baseTotal + taxes;
-
-    const handleContinue = () => {
-        console.log("Continue with booking", { phoneNumber, countryCode });
-    };
 
     return (
         <Box sx={{ maxWidth: "1200px", mx: "auto", p: 3 }}>

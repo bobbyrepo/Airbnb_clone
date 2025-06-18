@@ -12,19 +12,18 @@ import {
     FavoriteBorder as FavoriteBorderIcon,
     Star as StarIcon
 } from "@mui/icons-material"
-import { red } from "@mui/material/colors"
 import { styled } from "@mui/material/styles"
 
 import { Link } from 'react-router-dom'
 
-const PropertyCard = styled(Card)(({ theme }) => ({
+const PropertyCard = styled(Card)(() => ({
     borderRadius: "12px",
     boxShadow: "none",
     position: "relative",
     cursor: "pointer",
 }))
 
-const FavoriteButton = styled(IconButton)(({ theme }) => ({
+const FavoriteButton = styled(IconButton)(() => ({
     position: "absolute",
     top: "12px",
     right: "12px",

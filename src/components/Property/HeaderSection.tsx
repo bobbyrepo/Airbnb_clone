@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
+// import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 interface Props {
     placeName: string;
@@ -8,7 +8,7 @@ interface Props {
     toggleFavorite: () => void;
 }
 
-const HeaderSection: React.FC<Props> = ({ placeName, isFavorite, toggleFavorite }) => (
+const HeaderSection: React.FC<Props> = ({ placeName }) => (
     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
         <Typography variant="h4" fontWeight={600}>
             {placeName}
