@@ -21,7 +21,7 @@ export const DEFAULT_DATE_RANGE: Range = {
     key: "selection",
 };
 
-const StyledButton = styled(Button)(({ theme }) => ({
+const StyledButton = styled(Button)(() => ({
     border: "1px solid #e0e0e0",
     borderRadius: "999px",
     padding: "8px 8px",
@@ -60,7 +60,7 @@ const SearchBar = () => {
     const handleNext = () => setActiveStep((prev) => prev + 1);
     const handleBack = () => setActiveStep((prev) => prev - 1);
 
-    const handleChange = (field: string, value: Range) => {
+    const handleChange = (_field: string, value: Range) => {
         const normalized = normalizeDateRange(value);
         setDateRange(normalized);
     };

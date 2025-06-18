@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import {
     Box,
     Container,
-    Grid,
 } from "@mui/material";
+import Grid from '@mui/material/Grid';
+
 import { type Range } from "react-date-range";
 
 import { PropertiesData } from "../airbnb_clone_data_dummy";

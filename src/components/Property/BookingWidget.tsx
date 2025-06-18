@@ -35,7 +35,7 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
     const totalNights = nightsCount ? parseInt(nightsCount) : 0;
     const totalPrice = totalNights > 1 ? totalNights * price : price;
 
-    const handleChange = (field: string, value: Range) => {
+    const handleChange = (_field: string, value: Range) => {
         const normalized = normalizeDateRange(value);
         setDateRange(normalized);
     };
