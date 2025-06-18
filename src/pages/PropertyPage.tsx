@@ -49,15 +49,15 @@ const PropertyPage: React.FC = () => {
 
             {/* Details + Booking Card */}
             <Grid container spacing={5}>
-                <Grid item xs={12} md={7}>
+                <Box>
                     <PropertyDetails
                         details={property.details}
                         rating={property.rating}
                         numReviews={property.num_reviews}
                     />
-                </Grid>
+                </Box>
 
-                <Grid item xs={12} md={5}>
+                <Box>
                     <BookingWidget
                         id={property.id}
                         price={property.price}
@@ -65,7 +65,7 @@ const PropertyPage: React.FC = () => {
                         dateRange={dateRange}
                         setDateRange={setDateRange}
                     />
-                </Grid>
+                </Box>
             </Grid>
 
             {/* Reviews */}
