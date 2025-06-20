@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
 
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+
     "types": ["vite/client"],
     "esModuleInterop": true,
     "moduleResolution": "node",
