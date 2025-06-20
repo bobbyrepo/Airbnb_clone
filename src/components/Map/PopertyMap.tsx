@@ -2,8 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Box, Typography, IconButton, Paper } from "@mui/material"
-import { Search, Fullscreen, Add, Remove, Home } from "@mui/icons-material"
+import { Box, Typography, IconButton } from "@mui/material"
+import { Add, Remove, Home } from "@mui/icons-material"
 import Map, { Marker } from "react-map-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import type { Property } from "../../airbnb_clone_data_dummy"
@@ -95,81 +95,3 @@ const PropertyMap: React.FC<PropertyMapProps> = ({ property }) => {
 
 export default PropertyMap
 
-
-// import { Box } from '@mui/material';
-// import React, { useState } from 'react'
-// import Map, { Marker } from "react-map-gl";
-// import type { Property } from '../../airbnb_clone_data_dummy';
-
-// const TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
-
-// interface PropertyMapProps {
-//     property: Property;
-//     lat: number;
-//     long: number
-// }
-// const PopertyMap: React.FC<PropertyMapProps> = ({ property, lat, long }) => {
-
-//     const [viewPort, setViewPort] = useState({
-//         latitude: lat,
-//         longitude: long,
-//         zoom: 14,
-//     });
-//     return (
-
-//         <Box style={{ width: '100%', height: "100%" }}>
-//             <Map
-//                 {...viewPort}
-//                 mapboxAccessToken={TOKEN}
-//                 mapStyle="mapbox://styles/mapbox/streets-v12"
-//                 onMove={(evt) => setViewPort(evt.viewState)}
-//             >
-//                 {/* {properties.map((property) => ( */}
-//                 <Marker
-//                     key={property.id}
-//                     latitude={property.details.location.lat}
-//                     longitude={property.details.location.lng}
-//                 >
-//                     <Box
-//                         sx={{
-//                             backgroundColor: "white",
-//                             // border: "2px solid #ff385c",
-//                             borderRadius: "10px",
-//                             px: "10px",
-//                             py: "2px",
-//                             display: "flex",
-//                             alignItems: "center",
-//                             justifyContent: "center",
-//                             cursor: "pointer",
-//                             fontWeight: "bold",
-//                             fontSize: "14px",
-//                             color: "black",
-//                             boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-//                             transition: "all 0.2s ease-in-out",
-//                             "&:hover": {
-//                                 transform: "scale(1.1)",
-//                             },
-//                         }}
-//                     >
-//                         ${property.price}
-//                     </Box>
-//                 </Marker>
-//                 {/* ))} */}
-
-//             </Map>
-//         </Box>
-//         // <Box style={{ width: '100%', height: "100%" }}>
-
-//         //     <Map
-//         //         {...viewPort}
-//         //         mapboxAccessToken={TOKEN}
-//         //         mapStyle="mapbox://styles/mapbox/streets-v12"
-//         //         onMove={(evt) => setViewPort(evt.viewState)}
-//         //     >
-
-//         //     </Map>
-//         // </Box>
-//     )
-// }
-
-// export default PopertyMap
