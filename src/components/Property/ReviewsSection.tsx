@@ -34,15 +34,23 @@ const ReviewsSection: React.FC<Props> = ({ reviews }) => {
                         <Avatar src={review.image} sx={{ width: 40, height: 40 }} />
                         <Typography variant="body2" fontWeight={600}>{review.name}</Typography>
                     </Box>
-                    <Rating value={review.stars} readOnly size="small" />
+                    <Rating value={review.stars} readOnly size="small"
+                        sx={{ color: "black" }} />
                     <Typography variant="body2">{review.comment}</Typography>
                 </Box>
             ))}
 
             {hasMore && (
                 <Box mt={2}>
-                    <Button variant="outlined" onClick={handleLoadMore}>
-                        Load more
+                    <Button variant="contained" onClick={handleLoadMore}
+                        sx={{
+                            backgroundColor: "#ddd",     // Black background
+                            color: "#000",               // White text
+                            '&:hover': {
+                                backgroundColor: "#ccc",   // Darker on hover
+                            },
+                        }}>
+                        Show more
                     </Button>
                 </Box>
             )}

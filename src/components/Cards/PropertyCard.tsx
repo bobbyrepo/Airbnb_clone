@@ -5,7 +5,6 @@ import {
     IconButton,
     Card,
     CardMedia,
-    CardContent,
 } from "@mui/material"
 import {
     Favorite as FavoriteIcon,
@@ -57,13 +56,13 @@ function PropertyCardComponent({ property }: { property: any }) {
                 </FavoriteButton>
                 <CardMedia
                     component="img"
-                    height="200"
+                    // height="200"
                     image={property.place_image}
                     alt={property.title}
-                    sx={{ borderRadius: "12px" }}
+                    sx={{ borderRadius: "12px", aspectRatio: "1" }}
                 />
 
-                <CardContent sx={{ padding: "6px 0" }}>
+                <Box sx={{ padding: "6px 0" }}>
                     <Typography variant="body2" fontWeight={600} fontSize={15} >
                         {property.place_name}
                     </Typography>
@@ -78,7 +77,7 @@ function PropertyCardComponent({ property }: { property: any }) {
                             </Typography>
                         </Box>
                     </Box>
-                </CardContent>
+                </Box>
             </PropertyCard>
         </Link>
     )

@@ -13,6 +13,8 @@ const SearchPage: React.FC = () => {
         location: string
         guestCount: number
     }
+
+    console.log(state)
     const [activePropertyId, setActivePropertyId] = useState<number | null>(null);
 
 

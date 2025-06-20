@@ -67,11 +67,11 @@ export default function AirbnbHomepage() {
                             lg: "repeat(5, 1fr)",   // 5 columns
                             xl: "repeat(6, 1fr)",   // 6 columns
                         },
-                        gap: 2,
+                        gap: 3,
                     }}
                 >
                     {PropertiesData.map((property) => (
-                        <Box key={property.id} sx={{ width: "200px" }}>
+                        <Box key={property.id} sx={{ width: "auto" }}>
                             <PropertyCardComponent property={property} />
                         </Box>
                     ))}

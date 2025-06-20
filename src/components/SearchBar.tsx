@@ -1,6 +1,6 @@
 import { useState, } from "react";
 import {
-    Box, Button, Typography, IconButton, Paper, Stepper, Step, StepLabel
+    Box, Button, Typography, IconButton, Paper
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -123,18 +123,19 @@ const SearchBar = () => {
                             width: "100%",
                             maxWidth: 600, // same as maxWidth="sm"
                             bgcolor: "background.paper",
-                            borderRadius: 2,
+                            borderRadius: 10,
                             boxShadow: 24,
                             p: 3,
+                            px: 7
                         }}
                     >
-                        <Stepper activeStep={activeStep} alternativeLabel>
+                        {/* <Stepper activeStep={activeStep} alternativeLabel>
                             {steps.map((label) => (
                                 <Step key={label}>
                                     <StepLabel>{label}</StepLabel>
                                 </Step>
                             ))}
-                        </Stepper>
+                        </Stepper> */}
 
                         <Box mt={2}>
 
