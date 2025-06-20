@@ -4,7 +4,6 @@ import {
     Box,
     IconButton,
     Card,
-    CardMedia,
     CardContent,
 } from "@mui/material"
 import {
@@ -13,7 +12,6 @@ import {
     Star as StarIcon,
     ChevronLeft,
     ChevronRight,
-    Visibility
 } from "@mui/icons-material"
 import { styled } from "@mui/material/styles"
 

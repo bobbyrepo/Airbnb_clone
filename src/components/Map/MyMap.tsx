@@ -27,21 +27,7 @@ const MyMap: React.FC<MyMapProps> = ({ location, properties, activePropertyId, s
         zoom: 14,
     });
     const [selectedProperty, setSelectedProperty] = useState<Property | null>(null)
-
-    const getMarkers = (): Marker[] => {
-        return properties.map((property) => ({
-            id: property.id,
-            lat: property.details.location.lat,
-            lng: property.details.location.lng
-        }));
-    };
-
-    // Usage
-    const markers = getMarkers();
-    console.log(markers);
-
-
-
+    console.log(location)
     return (
         <Box style={{ width: '100%', height: "100%" }}>
             <Map

@@ -1,10 +1,9 @@
 import type React from "react"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
-import { Box, Typography, Grid } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { PropertiesData } from "../airbnb_clone_data_dummy"
 import type { Property } from "../airbnb_clone_data_dummy"
-import PropertyCardComponent from "../components/Cards/PropertyCard"
 import MyMap from "../components/Map/MyMap"
 import SearchedPropertyCardComponent from "../components/Cards/SearchedPropertyCard"
 
