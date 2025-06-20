@@ -16,6 +16,7 @@ import PhotoGallerySection from "../components/Property/PhotoGallerySection";
 import PropertyDetails from "../components/Property/PropertyDetails";
 import BookingWidget from "../components/Property/BookingWidget";
 import ReviewsSection from "../components/Property/ReviewsSection";
+import PopertyMap from "../components/Map/PopertyMap";
 
 const PropertyPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -29,6 +30,8 @@ const PropertyPage: React.FC = () => {
     });
 
     const toggleFavorite = () => setIsFavorite((prev) => !prev);
+
+    console.log(property?.details.location.lat)
 
     if (!property) return <div>Property not found</div>;
 
@@ -67,6 +70,10 @@ const PropertyPage: React.FC = () => {
                     />
                 </Box>
             </Grid>
+
+            {/* Map */}
+            {/* <PopertyMap property={property} lat={property.details.location.lat} long={property.details.location.lng} /> */}
+            <PopertyMap property={property} />
 
             {/* Reviews */}
             <Box mt={6} mb={10}>

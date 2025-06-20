@@ -62,13 +62,7 @@ function PropertyCardComponent({ property }: { property: any }) {
                     alt={property.title}
                     sx={{ borderRadius: "12px" }}
                 />
-                {/* <Box
-                sx={{
-                    height: 200,
-                    borderRadius: "12px",
-                    backgroundColor: red[100], // #ffcdd2
-                }}
-            /> */}
+
                 <CardContent sx={{ padding: "6px 0" }}>
                     <Typography variant="body2" fontWeight={600} fontSize={15} >
                         {property.place_name}

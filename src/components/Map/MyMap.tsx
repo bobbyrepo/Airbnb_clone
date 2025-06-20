@@ -26,6 +26,7 @@ const MyMap: React.FC<MyMapProps> = ({ location, properties, activePropertyId, s
         longitude: properties[0]?.details?.location?.lng,
         zoom: 14,
     });
+
     const [selectedProperty, setSelectedProperty] = useState<Property | null>(null)
     console.log(location)
     return (
