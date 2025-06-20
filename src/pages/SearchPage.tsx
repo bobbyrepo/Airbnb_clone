@@ -1,46 +1,51 @@
-import { useLocation } from 'react-router-dom';
-import { Box, Typography } from "@mui/material"
-import { PropertiesData } from '../airbnb_clone_data_dummy';
-import type { Property } from '../airbnb_clone_data_dummy';
-import PropertyCardComponent from '../components/PropertyCard';
+import type React from "react"
+import { useState } from "react"
+import { useLocation } from "react-router-dom"
+import { Box, Typography, Grid } from "@mui/material"
+import { PropertiesData } from "../airbnb_clone_data_dummy"
+import type { Property } from "../airbnb_clone_data_dummy"
+import PropertyCardComponent from "../components/Cards/PropertyCard"
+import MyMap from "../components/Map/MyMap"
+import SearchedPropertyCardComponent from "../components/Cards/SearchedPropertyCard"
 
 const SearchPage: React.FC = () => {
-    const location = useLocation();
+    const location = useLocation()
     const state = location.state as {
         location: string
-        guestCount: number;
-    };
+        guestCount: number
+    }
+    const [activePropertyId, setActivePropertyId] = useState<number | null>(null);
 
-    function filterProperties(
-        locationQuery: string,
-        minGuests: number
-    ): Property[] {
+
+    function filterProperties(locationQuery: string, minGuests: number): Property[] {
         return PropertiesData.filter((property) => {
-            const { city, country } = property.details.location;
-            const fullLocation = `${city}, ${country}`.toLowerCase();
+            const { city, country } = property.details.location
+            const fullLocation = `${city}, ${country}`.toLowerCase()
 
-            const matchesLocation = fullLocation.includes(locationQuery.toLowerCase());
+            const matchesLocation = fullLocation.includes(locationQuery.toLowerCase())
 
-            const guestMatch = property.details.has.match(/^(\d+)\s/);
-            const maxGuests = guestMatch ? parseInt(guestMatch[1], 10) : 0;
-            const matchesGuestCount = maxGuests >= minGuests;
+            const guestMatch = property.details.has.match(/^(\d+)\s/)
+            const maxGuests = guestMatch ? Number.parseInt(guestMatch[1], 10) : 0
+            const matchesGuestCount = maxGuests >= minGuests
 
-            return matchesLocation && matchesGuestCount;
-        });
+            return matchesLocation && matchesGuestCount
+        })
     }
 
-    const searchedResults = filterProperties(state.location, state.guestCount);
+    const searchedResults = filterProperties(state.location, state.guestCount)
 
     if (searchedResults.length == 0) {
         return (
-            <Box sx={{
-                height: '60vh', // adjust as needed
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                textAlign: 'center', // center text inside
-            }}>
+            <Box
+                sx={{
+                    height: "60vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                }}
+            >
                 <Typography variant="h4" fontWeight={600}>
                     No exact matches
                 </Typography>
@@ -52,38 +57,65 @@ const SearchPage: React.FC = () => {
     }
 
     return (
-        <Box sx={{ width: "90%", margin: "auto" }}>
-            <Box sx={{ my: 4 }}>
+        <Box sx={{ width: "90%", margin: "auto", display: "flex", gap: 4 }}>
+            <Box
+                sx={{
+                    pb: 10,
+                    width: "60%",
+                    overflowY: "auto",
+                    height: "100vh",
+                    borderRight: "1px solid #e0e0e0",
+                    // Hide scrollbar for Firefox
+                    scrollbarWidth: 'none',
+                }}
+            >
                 <Typography variant="body1" color="black" my={1}>
                     {searchedResults.length} Matches
                 </Typography>
-                {/* <SectionTitle>
-                Popular homes
-                <IconButton>
-                    <ChevronRightIcon />
-                </IconButton>
-            </SectionTitle> */}
+
+
+                {/* Results Section */}
                 <Box
                     sx={{
                         display: "grid",
                         gridTemplateColumns: {
-                            xs: "repeat(2, 1fr)",   // 2 columns
-                            sm: "repeat(3, 1fr)",   // 3 columns
-                            md: "repeat(4, 1fr)",   // 4 columns
-                            lg: "repeat(5, 1fr)",   // 5 columns
-                            xl: "repeat(6, 1fr)",   // 6 columns
+                            xs: "repeat(1, 1fr)",
+                            sm: "repeat(2, 1fr)",
+                            md: "repeat(3, 1fr)",
                         },
-                        gap: 2,
+                        gap: 3,
                     }}
                 >
                     {searchedResults.map((property) => (
-                        <Box key={property.id} sx={{ width: "200px" }}>
-                            <PropertyCardComponent property={property} />
+                        <Box key={property.id}
+                            onMouseEnter={() => setActivePropertyId(property.id)}
+                            onMouseLeave={() => setActivePropertyId(null)}
+                        >
+                            <SearchedPropertyCardComponent property={property} />
                         </Box>
                     ))}
                 </Box>
             </Box>
-        </Box >)
+            <Box sx={{
+                width: "40%",
+                height: "85vh",
+                marginY: "30px",
+                borderRadius: "20px",
+                overflow: "hidden",
+                position: "relative",
+                bgcolor: "#ddd"
+            }}>
+                {/* Map Section */}
+                <MyMap
+                    location={state.location}
+                    properties={searchedResults}
+                    activePropertyId={activePropertyId}
+                    setActivePropertyId={setActivePropertyId}
+                />
+
+            </Box>
+        </Box >
+    )
 }
 
 export default SearchPage

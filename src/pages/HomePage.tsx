@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 
-import PropertyCardComponent from "../components/PropertyCard"
+import PropertyCardComponent from "../components/Cards/PropertyCard"
 
 import { PropertiesData } from "../airbnb_clone_data_dummy"
 
