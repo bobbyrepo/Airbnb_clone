@@ -42,39 +42,53 @@ const PropertyDetails: React.FC<Props> = ({ details, rating, numReviews }) => (
             </Typography>
         </Box>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider sx={{ my: 2 }} />
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between    " }}>
             <StarIcon sx={{ color: "#FF385C" }} />
             <Typography fontWeight={600}>Guest favourite</Typography>
-            <Typography>{rating}</Typography>
-            <Rating value={rating} readOnly size="small" />
-            <Typography variant="body2" color="text.secondary">
-                {numReviews} Reviews
-            </Typography>
+
+            <Box display="flex" flexDirection="column" alignItems="center">
+                <Typography fontSize="22px" fontWeight={600}>{rating}</Typography>
+                <Rating value={rating} readOnly
+                    sx={{ color: "black", fontSize: "14px" }} />
+            </Box>
+
+            <Divider orientation="vertical" flexItem />
+
+            <Box display="flex" flexDirection="column" alignItems="center">
+                <Typography variant="body2" fontSize="22px" fontWeight={600}>
+                    {numReviews}
+                </Typography>
+                <Typography variant="body2">
+                    Reviews
+                </Typography>
+            </Box>
         </Box>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider sx={{ my: 2 }} />
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Avatar src={details?.host_image} sx={{ width: 56, height: 56 }} />
             <Typography>Hosted by {details?.hosted_by}</Typography>
         </Box>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider sx={{ my: 2 }} />
 
-        {amenities.map((item, idx) => (
-            <Box key={idx} sx={{ display: "flex", gap: 2, mb: 2 }}>
-                {item.icon}
-                <Box>
-                    <Typography fontWeight={600}>{item.title}</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {item.description}
-                    </Typography>
+        {
+            amenities.map((item, idx) => (
+                <Box key={idx} sx={{ display: "flex", gap: 2, mb: 2 }}>
+                    {item.icon}
+                    <Box>
+                        <Typography fontWeight={600}>{item.title}</Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {item.description}
+                        </Typography>
+                    </Box>
                 </Box>
-            </Box>
-        ))}
-    </Box>
+            ))
+        }
+    </Box >
 );
 
 export default PropertyDetails;

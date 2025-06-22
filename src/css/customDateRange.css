@@ -1,0 +1,50 @@
+/* Container */
+/* .rdrCalendarWrapper {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  } */
+  
+  /* Date cells */
+  .rdrDay {
+    /* height: 40px; */
+    /* width: 40px; */
+    /* line-height: 40px; */
+    font-size: 14px;
+    /* font-weight: 700; */
+    /* margin: 2px; */
+  }
+  
+  /* Selected range */
+  .rdrSelected,
+  .rdrInRange{
+    /* background-color: #ededed !important; */
+    background-color: #424242 !important;
+    color: white !important;
+  }
+  
+  .rdrStartEdge,
+  .rdrEndEdge{
+    background-color: #232322 !important;
+    color: white !important;
+  }
+
+  /* Today style */
+  .rdrDayToday .rdrDayNumber span {
+      /* border: 1px solid #232322;
+      border-radius: 100%; */
+  }
+  
+  /* Disabled days */
+  .rdrDayDisabled {
+    color: #ccc !important;
+  }
+  
+  /* Month and weekdays */
+  .rdrMonthName,
+  .rdrWeekDay {
+    font-weight: 600;
+    color: #333;
+  }
+  

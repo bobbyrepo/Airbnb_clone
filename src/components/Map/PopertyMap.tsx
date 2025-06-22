@@ -15,7 +15,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({ property }) => {
     const [viewState, setViewState] = useState({
         longitude: property.details.location.lng, // Fixed: was using lat
         latitude: property.details.location.lat, // Fixed: was using lng
-        zoom: 13,
+        zoom: 15,
     })
 
     return (

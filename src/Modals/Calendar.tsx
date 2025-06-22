@@ -5,6 +5,8 @@ import { DateRange, type Range, type RangeKeyDict } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
+import '../css/customDateRange.css';
+
 interface CalendarProps {
     setDateRange: (range: Range) => void;
     value: Range;
@@ -43,7 +45,7 @@ const Calendar: React.FC<CalendarProps> = ({
                     minDate={new Date()}
                     direction="vertical"
                     showDateDisplay={false}
-                    rangeColors={["#FF385C"]}
+                    rangeColors={["#232322"]}
                     disabledDates={disabledDates}
                 />
             </Box>

@@ -41,7 +41,10 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
     };
 
     return (
-        <Card sx={{ borderRadius: 2, boxShadow: "0 6px 16px rgba(0,0,0,0.12)", border: "1px solid #ddd" }}>
+        <Card sx={{
+            borderRadius: 2,
+            // boxShadow: "0 6px 16px rgba(0,0,0,0.12)"
+        }}>
             <Box sx={{ p: 3 }}>
                 <Box sx={{ display: "flex", alignItems: "baseline", gap: 1, mb: 3, flexWrap: "wrap" }}>
                     <Typography variant="h5" fontWeight={600}>
@@ -62,7 +65,7 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                         width: "100%",
                         maxWidth: 600,
                         bgcolor: "background.paper",
-                        border: "1px solid #ddd",
+                        // border: "1px solid #ddd",
                         borderRadius: 2,
                         p: 3,
                         mb: 3,

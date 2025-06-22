@@ -34,6 +34,24 @@ const FavoriteButton = styled(IconButton)(() => ({
     },
 }))
 
+const DotsContainer = styled(Box)({
+    position: "absolute",
+    bottom: 12,
+    left: "50%",
+    transform: "translateX(-50%)",
+    display: "flex",
+    gap: 4,
+    zIndex: 2,
+})
+
+const Dot = styled(Box)<{ active: boolean }>(({ active }) => ({
+    width: 6,
+    height: 6,
+    borderRadius: "50%",
+    backgroundColor: active ? "white" : "rgba(255, 255, 255, 0.5)",
+    transition: "background-color 0.2s ease",
+}))
+
 
 
 function SearchedPropertyCardComponent({ property }: { property: any }) {
@@ -41,11 +59,15 @@ function SearchedPropertyCardComponent({ property }: { property: any }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [isHovered, setIsHovered] = useState(false);
 
-    const handlePrevImage = () => {
+    const handlePrevImage = (e: React.MouseEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
         setCurrentImageIndex((prev) => (prev === 0 ? property?.details?.images?.length - 1 : prev - 1))
     }
 
-    const handleNextImage = () => {
+    const handleNextImage = (e: React.MouseEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
         setCurrentImageIndex((prev) => (prev === property?.details?.images?.length - 1 ? 0 : prev + 1))
     }
 
@@ -114,6 +136,15 @@ function SearchedPropertyCardComponent({ property }: { property: any }) {
                         </IconButton>
                     </Box>
                 )}
+
+                {property?.details?.images?.length > 1 && (
+                    <DotsContainer>
+                        {property?.details?.images.map((_: string, index: number) => (
+                            <Dot key={index} active={index === currentImageIndex} />
+                        ))}
+                    </DotsContainer>
+                )}
+
             </Box>
 
             <Link to={`/property/${property.id}`} style={{ textDecoration: "none", color: "inherit" }}>

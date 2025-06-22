@@ -8,6 +8,25 @@ import {
 import { Star as StarIcon, ChevronLeft, ChevronRight, Close as CloseIcon } from "@mui/icons-material";
 import type { Property } from "../../airbnb_clone_data_dummy";
 import { useCarousel } from "../../hooks/useCarousel";
+import { styled } from "@mui/system";
+
+const DotsContainer = styled(Box)({
+    position: "absolute",
+    bottom: 12,
+    left: "50%",
+    transform: "translateX(-50%)",
+    display: "flex",
+    gap: 4,
+    zIndex: 2,
+})
+
+const Dot = styled(Box)<{ active: boolean }>(({ active }) => ({
+    width: 6,
+    height: 6,
+    borderRadius: "50%",
+    backgroundColor: active ? "white" : "rgba(255, 255, 255, 0.5)",
+    transition: "background-color 0.2s ease",
+}))
 
 type Props = {
     property: Property;
@@ -39,11 +58,21 @@ const MarkerPopup: React.FC<Props> = ({ property, onClose }) => {
                 <CloseIcon fontSize="inherit" />
             </IconButton>
 
-            <img
-                src={property.details.images[currentIndex]}
-                alt={property.place_name}
-                style={{ width: "100%", height: 180, objectFit: "cover" }}
-            />
+            <Box position={"relative"}>
+                <img
+                    src={property.details.images[currentIndex]}
+                    alt={property.place_name}
+                    style={{ width: "100%", height: 180, objectFit: "cover" }}
+                />
+
+                {property.details?.images?.length > 1 && (
+                    <DotsContainer>
+                        {property?.details?.images.map((_: string, index: number) => (
+                            <Dot key={index} active={index === currentIndex} />
+                        ))}
+                    </DotsContainer>
+                )}
+            </Box>
 
             <Box sx={{ px: 2, pb: 1 }}>
                 <Typography variant="subtitle2" fontWeight={600} noWrap>
