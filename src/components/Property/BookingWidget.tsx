@@ -1,11 +1,12 @@
 import React from "react";
 import { Box, Typography, Card, Button } from "@mui/material";
-import Calendar from "../../Modals/Calendar";
+// import Calendar from "../../Modals/CalendarSelector";
 import { styled } from "@mui/material/styles";
 import { type Range } from "react-date-range";
 import { getNumberOfNights, normalizeDateRange } from "../../utils/helper";
 
 import { Link } from "react-router-dom";
+import CalendarSelector from "../../Modals/CalendarSelector";
 
 const ReserveButton = styled(Button)({
     backgroundColor: "#FF385C",
@@ -35,7 +36,7 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
     const totalNights = nightsCount ? parseInt(nightsCount) : 0;
     const totalPrice = totalNights > 1 ? totalNights * price : price;
 
-    const handleChange = (_field: string, value: Range) => {
+    const handleChange = (value: Range) => {
         const normalized = normalizeDateRange(value);
         setDateRange(normalized);
     };
@@ -43,7 +44,7 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
     return (
         <Card sx={{
             borderRadius: 2,
-            // boxShadow: "0 6px 16px rgba(0,0,0,0.12)"
+            boxShadow: "0 6px 16px rgba(0,0,0,0.12)"
         }}>
             <Box sx={{ p: 3 }}>
                 <Box sx={{ display: "flex", alignItems: "baseline", gap: 1, mb: 3, flexWrap: "wrap" }}>
@@ -71,8 +72,9 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                         mb: 3,
                     }}
                 >
-                    <Calendar setDateRange={setDateRange} value={dateRange} onChange={handleChange} />
+                    {/* <CalendarSelector setDateRange={setDateRange} value={dateRange} onChange={handleChange} /> */}
                 </Box>
+
                 <Link to={`/booking_request/${id}`}
                     state={{ dateRange, guestLabel }}
                 >

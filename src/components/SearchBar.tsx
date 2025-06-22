@@ -10,10 +10,11 @@ import { Link } from "react-router-dom";
 import { type Range } from "react-date-range";
 
 import LocationSelector from "../Modals/LocationSelector";
-import Calendar from "../Modals/Calendar";
+import Calendar from "../Modals/CalendarSelector";
 import GuestSelector from "../Modals/GuestSelector";
 
 import { getNumberOfNights, getTotalGuests, normalizeDateRange } from "../utils/helper";
+import CalendarSelector from "../Modals/CalendarSelector";
 
 export const DEFAULT_DATE_RANGE: Range = {
     startDate: new Date(),
@@ -60,7 +61,7 @@ const SearchBar = () => {
     const handleNext = () => setActiveStep((prev) => prev + 1);
     const handleBack = () => setActiveStep((prev) => prev - 1);
 
-    const handleChange = (_field: string, value: Range) => {
+    const handleChange = (value: Range) => {
         const normalized = normalizeDateRange(value);
         setDateRange(normalized);
     };
@@ -142,9 +143,12 @@ const SearchBar = () => {
                             {activeStep === 0 && <LocationSelector location={location} setLocation={setLocation} />}
 
                             {activeStep === 1 && (
-                                <Calendar
-                                    setDateRange={setDateRange}
+                                <CalendarSelector
+                                    heading1={"When do you plan to go?"}
+                                    heading2={"Make sure everyone is free!"}
+                                    align="center"
                                     value={dateRange ?? DEFAULT_DATE_RANGE}
+                                    setDateRange={setDateRange}
                                     onChange={handleChange}
                                 />
                             )}

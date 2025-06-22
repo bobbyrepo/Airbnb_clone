@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { data, useParams } from "react-router-dom";
 import {
     Box,
     Container,
+    Divider,
+    Typography,
 } from "@mui/material";
 import Grid from '@mui/material/Grid';
 
@@ -17,6 +19,9 @@ import PropertyDetails from "../components/Property/PropertyDetails";
 import BookingWidget from "../components/Property/BookingWidget";
 import ReviewsSection from "../components/Property/ReviewsSection";
 import PopertyMap from "../components/Map/PopertyMap";
+import { normalizeDateRange } from "../utils/helper";
+import CalendarSelector from "../Modals/CalendarSelector";
+import Calendar from "../Modals/Calender";
 
 const PropertyPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -30,6 +35,11 @@ const PropertyPage: React.FC = () => {
     });
 
     const toggleFavorite = () => setIsFavorite((prev) => !prev);
+
+    const handleChange = (value: Range) => {
+        const normalized = normalizeDateRange(value);
+        setDateRange(normalized);
+    };
 
     console.log(property?.details.location.lat)
 
@@ -52,12 +62,28 @@ const PropertyPage: React.FC = () => {
 
             {/* Details + Booking Card */}
             <Grid container spacing={5}>
-                <Box>
+                <Box >
                     <PropertyDetails
                         details={property.details}
                         rating={property.rating}
                         numReviews={property.num_reviews}
                     />
+
+                    <Divider sx={{ mb: 6 }} />
+
+                    <Box>
+                        <Typography variant="h5" fontWeight={600} mb={1}>
+                            Select checkout date                        </Typography>
+                        <Typography variant="body2" color="text.secondary" >
+                            Select checkout date
+                        </Typography>
+
+                        <Calendar
+                            value={dateRange}
+                            onChange={handleChange}
+                        />
+
+                    </Box>
                 </Box>
 
                 <Box>
