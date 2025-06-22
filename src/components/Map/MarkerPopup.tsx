@@ -9,6 +9,7 @@ import { Star as StarIcon, ChevronLeft, ChevronRight, Close as CloseIcon } from 
 import type { Property } from "../../airbnb_clone_data_dummy";
 import { useCarousel } from "../../hooks/useCarousel";
 import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
 
 const DotsContainer = styled(Box)({
     position: "absolute",
@@ -27,6 +28,20 @@ const Dot = styled(Box)<{ active: boolean }>(({ active }) => ({
     backgroundColor: active ? "white" : "rgba(255, 255, 255, 0.5)",
     transition: "background-color 0.2s ease",
 }))
+
+const navButtonStyle = (side: "left" | "right") => ({
+    position: "absolute",
+    top: "50%",
+    [side]: 12,
+    transform: "translateY(-50%)",
+    backgroundColor: "rgba(255,255,255,0.9)",
+    width: 32,
+    height: 32,
+    "&:hover": {
+        backgroundColor: "rgba(255,255,255,1)",
+    },
+});
+
 
 type Props = {
     property: Property;
@@ -58,41 +73,43 @@ const MarkerPopup: React.FC<Props> = ({ property, onClose }) => {
                 <CloseIcon fontSize="inherit" />
             </IconButton>
 
-            <Box position={"relative"}>
-                <img
-                    src={property.details.images[currentIndex]}
-                    alt={property.place_name}
-                    style={{ width: "100%", height: 180, objectFit: "cover" }}
-                />
+            <Link to={`/property/${property.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                <Box position={"relative"}>
+                    <img
+                        src={property.details.images[currentIndex]}
+                        alt={property.place_name}
+                        style={{ width: "100%", height: 180, objectFit: "cover" }}
+                    />
 
-                {property.details?.images?.length > 1 && (
-                    <DotsContainer>
-                        {property?.details?.images.map((_: string, index: number) => (
-                            <Dot key={index} active={index === currentIndex} />
-                        ))}
-                    </DotsContainer>
-                )}
-            </Box>
+                    {property.details?.images?.length > 1 && (
+                        <DotsContainer>
+                            {property?.details?.images.map((_: string, index: number) => (
+                                <Dot key={index} active={index === currentIndex} />
+                            ))}
+                        </DotsContainer>
+                    )}
+                </Box>
 
-            <Box sx={{ px: 2, pb: 1 }}>
-                <Typography variant="subtitle2" fontWeight={600} noWrap>
-                    {property.place_name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" mb={1}>
-                    {property.details.location.city}, {property.details.location.country}
-                </Typography>
-                <Grid container justifyContent="space-between" mb={1}>
-                    <Typography variant="body2" fontWeight={600}>
-                        ${property.price}/night
+                <Box sx={{ px: 2, pb: 1 }}>
+                    <Typography variant="subtitle2" fontWeight={600} noWrap>
+                        {property.place_name}
                     </Typography>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                        <StarIcon fontSize="small" />
-                        <Typography variant="body2" color="text.secondary">
-                            {property.rating} ({property.num_reviews})
+                    <Typography variant="body2" color="text.secondary" mb={1}>
+                        {property.details.location.city}, {property.details.location.country}
+                    </Typography>
+                    <Grid container justifyContent="space-between" mb={1}>
+                        <Typography variant="body2" fontWeight={600}>
+                            ${property.price}/night
                         </Typography>
-                    </Box>
-                </Grid>
-            </Box>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                            <StarIcon fontSize="small" />
+                            <Typography variant="body2" color="text.secondary">
+                                {property.rating} ({property.num_reviews})
+                            </Typography>
+                        </Box>
+                    </Grid>
+                </Box>
+            </Link>
 
             {
                 property.details.images.length > 1 && (
@@ -110,17 +127,5 @@ const MarkerPopup: React.FC<Props> = ({ property, onClose }) => {
     );
 };
 
-const navButtonStyle = (side: "left" | "right") => ({
-    position: "absolute",
-    top: "50%",
-    [side]: 12,
-    transform: "translateY(-50%)",
-    backgroundColor: "rgba(255,255,255,0.9)",
-    width: 32,
-    height: 32,
-    "&:hover": {
-        backgroundColor: "rgba(255,255,255,1)",
-    },
-});
 
 export default MarkerPopup;
