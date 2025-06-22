@@ -21,8 +21,9 @@ const PropertyMap: React.FC<PropertyMapProps> = ({ property }) => {
     return (
         <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
             {/* Header */}
+
             <Box sx={{ p: 3, backgroundColor: "white" }}>
-                <Typography variant="h4" sx={{ fontWeight: 600, mb: 1 }}>
+                <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
                     Where you'll be
                 </Typography>
                 <Typography variant="h6" color="text.secondary">

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import Grid from '@mui/material/Grid';
 
-import { type Range } from "react-date-range";
+import { type Range, type RangeKeyDict } from "react-date-range";
 
 import { PropertiesData } from "../airbnb_clone_data_dummy";
 
@@ -36,8 +36,8 @@ const PropertyPage: React.FC = () => {
 
     const toggleFavorite = () => setIsFavorite((prev) => !prev);
 
-    const handleChange = (value: Range) => {
-        const normalized = normalizeDateRange(value);
+    const handleChange = (value: RangeKeyDict) => {
+        const normalized = normalizeDateRange(value.selection);
         setDateRange(normalized);
     };
 
@@ -61,7 +61,14 @@ const PropertyPage: React.FC = () => {
             />
 
             {/* Details + Booking Card */}
-            <Grid container spacing={5}>
+            <Grid
+                container
+                spacing={5}
+                width="100%"
+                justifyContent="space-between"
+                position="relative"
+            >
+
                 <Box >
                     <PropertyDetails
                         details={property.details}
@@ -74,7 +81,7 @@ const PropertyPage: React.FC = () => {
                     <Box>
                         <Typography variant="h5" fontWeight={600} mb={1}>
                             Select checkout date                        </Typography>
-                        <Typography variant="body2" color="text.secondary" >
+                        <Typography variant="body1" color="text.secondary" >
                             Select checkout date
                         </Typography>
 
@@ -85,16 +92,17 @@ const PropertyPage: React.FC = () => {
 
                     </Box>
                 </Box>
-
-                <Box>
-                    <BookingWidget
-                        id={property.id}
-                        price={property.price}
-                        guestLabel={property.details.has.slice(0, 1)}
-                        dateRange={dateRange}
-                        setDateRange={setDateRange}
-                    />
-                </Box>
+                <Grid >
+                    <Box position="sticky" top={100}>
+                        <BookingWidget
+                            id={property.id}
+                            price={property.price}
+                            guestLabel={property.details.has.slice(0, 1)}
+                            dateRange={dateRange}
+                            setDateRange={setDateRange}
+                        />
+                    </Box>
+                </Grid>
             </Grid>
 
             {/* Map */}

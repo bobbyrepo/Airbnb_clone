@@ -1,12 +1,16 @@
-import React from "react";
-import { Box, Typography, Card, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, Card, Button, TextField, Divider, Collapse } from "@mui/material";
 // import Calendar from "../../Modals/CalendarSelector";
 import { styled } from "@mui/material/styles";
-import { type Range } from "react-date-range";
-import { getNumberOfNights, normalizeDateRange } from "../../utils/helper";
+import { type Range, type RangeKeyDict } from "react-date-range";
+import { getNumberOfNights, getTotalGuests, normalizeDateRange } from "../../utils/helper";
 
 import { Link } from "react-router-dom";
 import CalendarSelector from "../../Modals/CalendarSelector";
+import { format } from "date-fns";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import GuestCounter from "../../Modals/GuestCounter";
+import Calendar from "../../Modals/Calender";
 
 const ReserveButton = styled(Button)({
     backgroundColor: "#FF385C",
@@ -20,7 +24,40 @@ const ReserveButton = styled(Button)({
     },
 });
 
+const SectionLabel = styled(Typography)({
+    fontSize: "10px",
+    fontWeight: 600,
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+    marginBottom: "4px",
+    color: "#222",
+})
 
+const GuestsContainer = styled(Box)({
+    cursor: "pointer",
+    // border: "1px solid #ddd",
+    // borderRadius: "8px",
+    "&:hover": {
+        "& .MuiBox-root": {
+            borderColor: "#222",
+        },
+    },
+})
+
+const GuestsHeader = styled(Box)({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0px 14px",
+    marginBottom: "14px"
+})
+
+interface GuestCount {
+    adults: number;
+    children: number;
+    infants: number;
+    pets: number;
+}
 
 interface Props {
     id: number,
@@ -36,10 +73,35 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
     const totalNights = nightsCount ? parseInt(nightsCount) : 0;
     const totalPrice = totalNights > 1 ? totalNights * price : price;
 
-    const handleChange = (value: Range) => {
-        const normalized = normalizeDateRange(value);
-        setDateRange(normalized);
+    const [guestsOpen, setGuestsOpen] = useState(false)
+    const [guestCount, setGuestCount] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
+    const [showCalendar, setShowCalendar] = useState(false);
+
+
+
+    const handleGuestsToggle = () => {
+        setGuestsOpen(!guestsOpen)
+    }
+
+    const handleGuestCountChange = (key: keyof GuestCount, delta: number) => {
+        setGuestCount((prev) => ({
+            ...prev,
+            [key]: Math.max(0, prev[key] + delta),
+        }));
     };
+
+    const handleDateChange = (value: RangeKeyDict) => {
+        setDateRange(value.selection);
+
+    };
+
+    const checkIn: string = dateRange?.startDate
+        ? format(new Date(dateRange.startDate), "dd/MM/yyyy")
+        : "Add date";
+
+    const checkOut: string = dateRange?.endDate
+        ? format(new Date(dateRange.endDate), "dd/MM/yyyy")
+        : "Add date";
 
     return (
         <Card sx={{
@@ -48,16 +110,13 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
         }}>
             <Box sx={{ p: 3 }}>
                 <Box sx={{ display: "flex", alignItems: "baseline", gap: 1, mb: 3, flexWrap: "wrap" }}>
-                    <Typography variant="h5" fontWeight={600}>
+                    <Typography variant="h5" fontWeight={600} sx={{ textDecoration: "underline" }}>
                         ${totalPrice}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {totalNights > 1
                             ? `total for ${totalNights} nights`
-                            : "per night"} for
-                    </Typography>
-                    <Typography variant="h5" fontWeight={600}>
-                        {guestLabel} Guest{guestLabel !== "1" ? "s" : ""}
+                            : "per night"}
                     </Typography>
                 </Box>
 
@@ -68,15 +127,87 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                         bgcolor: "background.paper",
                         // border: "1px solid #ddd",
                         borderRadius: 2,
-                        p: 3,
                         mb: 3,
                     }}
                 >
-                    {/* <CalendarSelector setDateRange={setDateRange} value={dateRange} onChange={handleChange} /> */}
+                    <Box sx={{ border: "1px solid #ddd", borderRadius: "8px", overflow: "hidden", cursor: "pointer" }}                    >
+                        {/* Check-in and Check-out */}
+                        <Box sx={{ display: "flex", width: "350px" }}
+                            onClick={() => setShowCalendar((prev) => !prev)}
+                        >
+                            <Box sx={{ flex: 1, borderRight: "1px solid #ddd" }}>
+                                <Box sx={{ padding: "8px 14px 0px 18px " }}>
+                                    <SectionLabel>CHECK-IN</SectionLabel>
+                                </Box>
+                                <Box
+                                    sx={{
+                                        px: 2,
+                                        mb: 1,
+                                        border: "1px solid transparent",
+                                        fontSize: 16,
+                                        fontWeight: 500,
+                                        color: checkOut ? "text.primary" : "text.secondary",
+                                    }}
+                                >
+                                    {checkIn}
+                                </Box>
+                            </Box>
+                            <Box sx={{ flex: 1 }}>
+                                <Box sx={{ padding: "8px 14px 0px 18px " }}>
+                                    <SectionLabel>CHECKOUT</SectionLabel>
+                                </Box>
+                                <Box
+                                    sx={{
+                                        px: 2,
+                                        mb: 1,
+                                        border: "1px solid transparent",
+                                        fontSize: 16,
+                                        fontWeight: 500,
+                                        color: checkOut ? "text.primary" : "text.secondary",
+                                    }}
+                                >
+                                    {checkOut}
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        {showCalendar && (
+                            <Calendar
+                                value={dateRange}
+                                onChange={(range) => {
+                                    handleDateChange(range);
+                                    if (range.selection.startDate != range.selection.endDate) {
+                                        setShowCalendar(false); // Only hide when both dates are selected
+                                    }
+                                }}
+                            />
+                        )}
+
+                        <Divider />
+
+                        <GuestsContainer
+                            onClick={handleGuestsToggle}
+                        >
+                            <Box sx={{ padding: "8px 14px 0px 18px " }}>
+                                <SectionLabel>GUESTS</SectionLabel>
+                            </Box>
+                            <GuestsHeader>
+                                <Typography sx={{ fontSize: "14px", fontWeight: 500 }}>
+                                    {getTotalGuests(guestCount)} guest{getTotalGuests(guestCount) !== 1 ? "s" : ""}
+                                </Typography>
+                                {guestsOpen ? <ExpandLess /> : <ExpandMore />}
+                            </GuestsHeader>
+                        </GuestsContainer>
+
+                        <Collapse in={guestsOpen} sx={{ px: 4 }}>
+                            <GuestCounter guestCount={guestCount} onChange={handleGuestCountChange} />
+                        </Collapse>
+                    </Box>
+
                 </Box>
 
                 <Link to={`/booking_request/${id}`}
-                    state={{ dateRange, guestLabel }}
+                    state={{ dateRange, guestLabel: getTotalGuests(guestCount) }}
                 >
                     <ReserveButton fullWidth size="large">Reserve</ReserveButton>
                 </Link>
