@@ -73,9 +73,9 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
     const totalNights = nightsCount ? parseInt(nightsCount) : 0;
     const totalPrice = totalNights > 1 ? totalNights * price : price;
 
-    const [guestsOpen, setGuestsOpen] = useState(false)
-    const [guestCount, setGuestCount] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
-    const [showCalendar, setShowCalendar] = useState(false);
+    const [guestsOpen, setGuestsOpen] = useState<boolean>(false)
+    const [guestCount, setGuestCount] = useState<GuestCount>({ adults: 0, children: 0, infants: 0, pets: 0 });
+    const [showCalendar, setShowCalendar] = useState<boolean>(false);
 
 
 

@@ -12,7 +12,11 @@ interface PropertyMapProps {
 
 const PropertyMap: React.FC<PropertyMapProps> = ({ property }) => {
     // Fix: Swap longitude and latitude - longitude should use lng, latitude should use lat
-    const [viewState, setViewState] = useState({
+    const [viewState, setViewState] = useState<{
+        latitude: number;
+        longitude: number;
+        zoom: number;
+    }>({
         longitude: property.details.location.lng, // Fixed: was using lat
         latitude: property.details.location.lat, // Fixed: was using lng
         zoom: 15,

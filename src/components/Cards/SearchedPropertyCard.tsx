@@ -16,6 +16,7 @@ import {
 import { styled } from "@mui/material/styles"
 
 import { Link } from 'react-router-dom'
+import type { Property } from "../../airbnb_clone_data_dummy"
 
 const PropertyCard = styled(Card)(() => ({
     boxShadow: "none",
@@ -53,10 +54,9 @@ const Dot = styled(Box)<{ active: boolean }>(({ active }) => ({
 }))
 
 
-
-function SearchedPropertyCardComponent({ property }: { property: any }) {
-    const [isFavorite, setIsFavorite] = React.useState(false)
-    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+const SearchedPropertyCardComponent: React.FC<{ property: Property }> = ({ property }) => {
+    const [isFavorite, setIsFavorite] = React.useState<boolean>(false)
+    const [currentImageIndex, setCurrentImageIndex] = useState<number>(0)
     const [isHovered, setIsHovered] = useState(false);
 
     const handlePrevImage = (e: React.MouseEvent) => {

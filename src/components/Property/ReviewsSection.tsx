@@ -13,7 +13,7 @@ interface Props {
 }
 
 const ReviewsSection: React.FC<Props> = ({ reviews }) => {
-    const [visibleCount, setVisibleCount] = useState(5);
+    const [visibleCount, setVisibleCount] = useState<number>(5);
 
     const handleLoadMore = () => {
         setVisibleCount((prev) => prev + 5);

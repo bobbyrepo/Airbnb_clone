@@ -27,7 +27,7 @@ const PropertyPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const property = PropertiesData.find((item) => item.id === Number(id));
 
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const [dateRange, setDateRange] = useState<Range>({
         startDate: new Date(),
         endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),

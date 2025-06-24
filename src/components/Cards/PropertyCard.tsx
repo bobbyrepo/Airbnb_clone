@@ -14,6 +14,7 @@ import {
 import { styled } from "@mui/material/styles"
 
 import { Link } from 'react-router-dom'
+import type { Property } from "../../airbnb_clone_data_dummy"
 
 const PropertyCard = styled(Card)(() => ({
     borderRadius: "12px",
@@ -44,8 +45,8 @@ const FavoriteButton = styled(IconButton)(() => ({
 //     zIndex: 1,
 // }))
 
-function PropertyCardComponent({ property }: { property: any }) {
-    const [isFavorite, setIsFavorite] = React.useState(false)
+const PropertyCardComponent: React.FC<{ property: Property }> = ({ property }) => {
+    const [isFavorite, setIsFavorite] = React.useState<boolean>(false)
 
     return (
         <Link to={`/property/${property.id}`} style={{ textDecoration: "none" }}>
@@ -58,7 +59,7 @@ function PropertyCardComponent({ property }: { property: any }) {
                     component="img"
                     // height="200"
                     image={property.place_image}
-                    alt={property.title}
+                    alt={property.place_name}
                     sx={{ borderRadius: "12px", aspectRatio: "1" }}
                 />
 

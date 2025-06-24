@@ -46,8 +46,7 @@ import { PropertiesData } from "../airbnb_clone_data_dummy"
 // }))
 
 
-
-export default function AirbnbHomepage() {
+const AirbnbHomepage: React.FC = () => {
     return (
         <Box sx={{ width: "90%", margin: "auto" }}>
             <Box sx={{ my: 6 }}>
@@ -80,3 +79,5 @@ export default function AirbnbHomepage() {
         </Box >
     )
 }
+
+export default AirbnbHomepage

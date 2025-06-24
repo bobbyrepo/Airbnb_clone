@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Typography, Divider, Avatar, Chip, Rating } from "@mui/material";
 import { Star as StarIcon } from "@mui/icons-material";
+import type { PropertyDetails } from "../../airbnb_clone_data_dummy";
 
 interface Props {
-    details: any;
+    details: PropertyDetails;
     rating: number;
     numReviews: number;
 }

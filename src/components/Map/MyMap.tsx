@@ -14,16 +14,14 @@ interface MyMapProps {
     setActivePropertyId: (id: number) => void;
 }
 
-type Marker = {
-    id: number;
-    lat: number;
-    lng: number;
-};
-
 const MyMap: React.FC<MyMapProps> = ({ location, properties, activePropertyId, setActivePropertyId }) => {
-    const [viewPort, setViewPort] = useState({
-        latitude: properties[0]?.details?.location?.lat,
-        longitude: properties[0]?.details?.location?.lng,
+    const [viewPort, setViewPort] = useState<{
+        latitude: number;
+        longitude: number;
+        zoom: number;
+    }>({
+        latitude: properties[0]?.details.location.lat ?? 0,
+        longitude: properties[0]?.details.location.lng ?? 0,
         zoom: 14,
     });
 

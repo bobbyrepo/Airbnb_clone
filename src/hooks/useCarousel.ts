@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const useCarousel = (images: string[]) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const prev = () =>
         setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));

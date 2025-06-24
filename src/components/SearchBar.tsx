@@ -16,6 +16,13 @@ import GuestSelector from "../Modals/GuestSelector";
 import { getNumberOfNights, getTotalGuests, normalizeDateRange } from "../utils/helper";
 import CalendarSelector from "../Modals/CalendarSelector";
 
+interface GuestCount {
+    adults: number;
+    children: number;
+    infants: number;
+    pets: number;
+}
+
 export const DEFAULT_DATE_RANGE: Range = {
     startDate: new Date(),
     endDate: new Date(Date.now() + 24 * 60 * 60 * 1000), // +1 day
@@ -48,13 +55,13 @@ const modalStyle = {
     justifyContent: "center",
 };
 
-const steps = ["Location", "Dates", "Guests"];
+const steps: string[] = ["Location", "Dates", "Guests"];
 
 const SearchBar = () => {
-    const [open, setOpen] = useState(false);
-    const [activeStep, setActiveStep] = useState(0);
-    const [location, setLocation] = useState("");
-    const [guestCount, setGuestCount] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
+    const [open, setOpen] = useState<boolean>(false);
+    const [activeStep, setActiveStep] = useState<number>(0);
+    const [location, setLocation] = useState<string>("");
+    const [guestCount, setGuestCount] = useState<GuestCount>({ adults: 0, children: 0, infants: 0, pets: 0 });
 
     const [dateRange, setDateRange] = useState<Range | null>(null);
 

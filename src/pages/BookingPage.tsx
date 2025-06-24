@@ -63,8 +63,7 @@ const ContinueButton = styled(Button)({
     },
 });
 
-
-const BookingPage = () => {
+const BookingPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const location = useLocation();
     const state = location.state as {
