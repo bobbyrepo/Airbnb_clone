@@ -15,7 +15,7 @@ import { PropertiesData } from "../airbnb_clone_data_dummy";
 // ✅ Modular components
 import HeaderSection from "../components/Property/HeaderSection";
 import PhotoGallerySection from "../components/Property/PhotoGallerySection";
-import PropertyDetails from "../components/Property/PropertyDetails";
+import PropertyDetailsSection from "../components/Property/PropertyDetailsSection";
 import BookingWidget from "../components/Property/BookingWidget";
 import ReviewsSection from "../components/Property/ReviewsSection";
 import PopertyMap from "../components/Map/PopertyMap";
@@ -70,7 +70,7 @@ const PropertyPage: React.FC = () => {
             >
 
                 <Box >
-                    <PropertyDetails
+                    <PropertyDetailsSection
                         details={property.details}
                         rating={property.rating}
                         numReviews={property.num_reviews}

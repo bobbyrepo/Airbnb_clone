@@ -27,7 +27,7 @@ const amenities = [
     },
 ];
 
-const PropertyDetails: React.FC<Props> = ({ details, rating, numReviews }) => (
+const PropertyDetailsSection: React.FC<Props> = ({ details, rating, numReviews }) => (
     <Box>
         <Typography variant="h6" fontWeight={600}>
             {details?.type}
@@ -92,4 +92,4 @@ const PropertyDetails: React.FC<Props> = ({ details, rating, numReviews }) => (
     </Box >
 );
 
-export default PropertyDetails;
+export default PropertyDetailsSection;
