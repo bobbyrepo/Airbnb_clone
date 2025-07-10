@@ -21,7 +21,7 @@ export default function PropertyCarousel({ title, properties }: PropertyCarousel
         if (isMobile) return 2
         if (isTablet) return 3
         if (isLarge) return 4
-        return 5
+        return 6
     }
 
     const cardsToShow = getCardsToShow()
@@ -53,7 +53,12 @@ export default function PropertyCarousel({ title, properties }: PropertyCarousel
                     sx={{
                         fontWeight: 600,
                         color: "text.primary",
-                        fontSize: "20px",
+                        fontSize: {
+                            xs: "14px",
+                            sm: "16px",
+                            md: "18px",
+                            lg: "20px",
+                        },
                     }}
                 >
                     Popular homes in {title}
@@ -65,8 +70,8 @@ export default function PropertyCarousel({ title, properties }: PropertyCarousel
                         sx={{
                             bgcolor: "background.paper",
                             boxShadow: 2,
-                            width: 32,
-                            height: 32,
+                            width: { xs: 28, sm: 32 },
+                            height: { xs: 28, sm: 32 },
                             "&:hover": {
                                 bgcolor: canSlideLeft ? "grey.50" : "background.paper",
                                 cursor: canSlideLeft ? "pointer" : "not-allowed",
@@ -76,15 +81,15 @@ export default function PropertyCarousel({ title, properties }: PropertyCarousel
                         onClick={slideLeft}
                         disabled={!canSlideLeft}
                     >
-                        <ChevronLeft sx={{ fontSize: 20 }} />
+                        <ChevronLeft sx={{ fontSize: { xs: 19, sm: 20 } }} />
                     </IconButton>
 
                     <IconButton
                         sx={{
                             bgcolor: "background.paper",
                             boxShadow: 2,
-                            width: 32,
-                            height: 32,
+                            width: { xs: 28, sm: 32 },
+                            height: { xs: 28, sm: 32 },
                             "&:hover": {
                                 bgcolor: canSlideRight ? "grey.50" : "background.paper",
                                 cursor: canSlideRight ? "pointer" : "not-allowed",
@@ -94,7 +99,7 @@ export default function PropertyCarousel({ title, properties }: PropertyCarousel
                         onClick={slideRight}
                         disabled={!canSlideRight}
                     >
-                        <ChevronRight sx={{ fontSize: 20 }} />
+                        <ChevronRight sx={{ fontSize: { xs: 19, sm: 20 } }} />
                     </IconButton>
                 </Box>
 
@@ -104,12 +109,23 @@ export default function PropertyCarousel({ title, properties }: PropertyCarousel
             <Box sx={{ position: "relative" }}>
 
                 {/* Cards Container */}
+
+                {/* <Box
+                    display="grid"
+                    gridTemplateColumns="repeat(7, 1fr)"
+                    gap={3}
+                >
+                    {properties.map((property) => (
+                        <PropertyCardComponent property={property} />
+                    ))}
+                </Box> */}
+
                 <Box sx={{ overflow: "hidden" }}>
                     <Box
                         sx={{
                             display: "flex",
                             transition: "transform 0.5s ease-in-out",
-                            gap: 3,
+                            gap: { xs: 2, md: 3 },
                             transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
                         }}
                     >
@@ -118,7 +134,7 @@ export default function PropertyCarousel({ title, properties }: PropertyCarousel
                                 key={property.id}
                                 sx={{
                                     flexShrink: 0,
-                                    width: `${80 / cardsToShow}%`,
+                                    width: `${85 / cardsToShow}%`,
                                 }}
                             >
                                 <PropertyCardComponent property={property} />

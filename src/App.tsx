@@ -12,7 +12,7 @@ import { Box } from "@mui/material"
 function App() {
   return (
     <BrowserRouter>
-      <Box sx={{ position: "sticky", top: "0", zIndex: 900 }}>
+      <Box sx={{ position: "sticky", top: "0", zIndex: 900, bgcolor: "white" }}>
         <Navbar />
       </Box>
       <Routes>

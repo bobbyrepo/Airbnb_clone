@@ -64,10 +64,24 @@ const PropertyCardComponent: React.FC<{ property: Property }> = ({ property }) =
                 />
 
                 <Box sx={{ padding: "6px 0" }}>
-                    <Typography variant="body2" fontWeight={600} fontSize={15} >
+                    <Typography variant="body2" fontWeight={600} sx={{
+                        fontSize: {
+                            xs: "13px",
+                            sm: "14px",
+                            md: "16px",
+                            lg: "17px",
+                        },
+                    }} >
                         {property.place_name}
                     </Typography>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Box sx={{
+                        display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", fontSize: {
+                            xs: "13px",
+                            sm: "14px",
+                            md: "16px",
+                            lg: "17px",
+                        },
+                    }}>
                         <Typography variant="body2" fontWeight={400} fontSize={14}>
                             ${property.price} for 1 nights
                         </Typography>

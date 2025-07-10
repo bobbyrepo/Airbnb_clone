@@ -25,7 +25,13 @@ const AirbnbHomepage: React.FC = () => {
 
     return (
         <Box sx={{ width: "90%", margin: "auto" }}>
-            <Box sx={{ my: 6 }}>
+            <Box sx={{
+                my: {
+                    xs: 2,
+                    md: 4,
+                    lg: 6,
+                }
+            }}>
                 {Object.entries(groupedProperties).map(([location, properties]) => (
                     <PropertyCarousel key={location} title={location} properties={properties} />
                 ))}

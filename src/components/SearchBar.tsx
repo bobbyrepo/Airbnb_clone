@@ -83,9 +83,13 @@ const SearchBar = () => {
     // console.log(parseInt(summary))
 
     return (
-        <>
+        <Box width={"100%"}>
             <Paper elevation={0} sx={{ borderRadius: 999 }}>
-                <StyledButton onClick={() => setOpen(true)}>
+                <StyledButton onClick={() => setOpen(true)}
+                    sx={{
+                        width: "fit-content", mx: "auto",
+                        display: { xs: "none", sm: "flex" },
+                    }}>
                     <Typography variant="body2" fontWeight={600} color="text.primary" sx={{ px: 2 }}>
                         {(location || "Anywhere").slice(0, 10)}
                     </Typography>
@@ -118,7 +122,25 @@ const SearchBar = () => {
                         <SearchIcon fontSize="small" />
                     </IconButton>
                 </StyledButton>
-            </Paper>
+
+                <StyledButton onClick={() => setOpen(true)}
+                    sx={{
+                        width: "100%",
+                        display: { xs: "flex", sm: "none" },
+                    }}>
+                    <Typography variant="body2" fontWeight={600} color="text.primary" sx={{ px: 2 }}>
+                        Search
+                    </Typography>
+                    <IconButton size="small" sx={{ backgroundColor: "error.main", color: "white" }}>
+                        <SearchIcon sx={{
+                            fontSize: {
+                                xs: "1.15rem",
+                                sm: "1.25rem"
+                            },
+                        }} />
+                    </IconButton>
+                </StyledButton>
+            </Paper >
 
             {open && (
                 <Box
@@ -194,8 +216,9 @@ const SearchBar = () => {
                         </Box>
                     </Box>
                 </Box>
-            )}
-        </>
+            )
+            }
+        </Box>
     );
 };
 
