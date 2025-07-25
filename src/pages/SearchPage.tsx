@@ -1,7 +1,10 @@
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import { Box, Typography } from "@mui/material"
+import { Box, Typography, Button, useMediaQuery, useTheme } from "@mui/material"
+import MapIcon from "@mui/icons-material/Map"
+import ListIcon from "@mui/icons-material/List"
+import GridViewIcon from "@mui/icons-material/GridView"
 import { PropertiesData } from "../airbnb_clone_data_dummy"
 import type { Property } from "../airbnb_clone_data_dummy"
 import MyMap from "../components/Map/MyMap"
@@ -14,8 +17,21 @@ const SearchPage: React.FC = () => {
         guestCount: number
     }
 
-    console.log(state)
-    const [activePropertyId, setActivePropertyId] = useState<number | null>(null);
+    const theme = useTheme()
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+
+    // State to track whether to show map or list on medium screens (default to list)
+    // For small screens, we'll always show both with the map on top
+    const [showMap, setShowMap] = useState<boolean>(false)
+    const [activePropertyId, setActivePropertyId] = useState<number | null>(null)
+
+    // Reset to list view when screen size changes to mobile but not small
+    useEffect(() => {
+        if (isMobile && !isSmallScreen) {
+            setShowMap(false)
+        }
+    }, [isMobile, isSmallScreen])
 
 
     function filterProperties(locationQuery: string, minGuests: number): Property[] {
@@ -58,22 +74,46 @@ const SearchPage: React.FC = () => {
     }
 
     return (
-        <Box sx={{ width: "90%", margin: "auto", display: "flex", gap: 4 }}>
+        <Box sx={{
+            width: { sm: "90%" },
+            margin: "auto",
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: 4,
+            position: "relative",
+            height: "100vh"
+        }}>
+            {/* List Section */}
             <Box
                 sx={{
                     pb: 10,
-                    width: "60%",
+                    width: { xs: "100%", md: "60%" },
                     overflowY: "auto",
-                    height: "100vh",
-                    borderRight: "1px solid #e0e0e0",
-                    // Hide scrollbar for Firefox
+                    height: isSmallScreen ? "60vh" : "100vh",
+                    borderRight: { xs: "none", md: "1px solid #e0e0e0" },
                     scrollbarWidth: 'none',
+                    display: isMobile && showMap && !isSmallScreen ? "none" : "block",
+                    position: isSmallScreen ? "absolute" : "static",
+                    bottom: isSmallScreen ? 0 : "auto",
+                    left: 0,
+                    right: 0,
+                    zIndex: isSmallScreen ? 2 : 1,
+                    backgroundColor: "white",
+                    transition: "all 0.3s ease",
+                    ...(isSmallScreen && {
+                        position: "absolute",
+                        height: "60vh",
+                        borderTopLeftRadius: "20px",
+                        borderTopRightRadius: "20px",
+                        boxShadow: "0px -4px 10px rgba(0,0,0,0.1)",
+                        paddingTop: "10px",
+                        px: 3
+                    })
                 }}
             >
                 <Typography variant="body1" color="black" my={1}>
                     {searchedResults.length} Matches
                 </Typography>
-
 
                 {/* Results Section */}
                 <Box
@@ -97,25 +137,66 @@ const SearchPage: React.FC = () => {
                     ))}
                 </Box>
             </Box>
+
+            {/* Map Section */}
             <Box sx={{
-                width: "40%",
-                height: "85vh",
-                marginY: "30px",
-                borderRadius: "20px",
+                width: { xs: "100%", md: "40%" },
+                height: isSmallScreen ? "100%" : isMobile && !showMap ? "0" : "85vh",
+                marginY: { xs: 0, md: "30px" },
+                borderRadius: { xs: 0, md: "20px" },
                 overflow: "hidden",
-                position: "relative",
-                bgcolor: "#ddd"
+                position: isSmallScreen ? "relative" : "relative",
+                top: 0,
+                left: 0,
+                right: 0,
+                bgcolor: "#ddd",
+                display: isMobile && !showMap && !isSmallScreen ? "none" : "block",
+                zIndex: 1,
+                paddingBottom: isSmallScreen ? "60vh" : 0
             }}>
-                {/* Map Section */}
                 <MyMap
                     location={state.location}
                     properties={searchedResults}
                     activePropertyId={activePropertyId}
                     setActivePropertyId={setActivePropertyId}
                 />
-
             </Box>
-        </Box >
+
+            {/* Floating Toggle Button (only visible on medium screens, not small screens) */}
+            {isMobile && !isSmallScreen && (
+                <Box
+                    sx={{
+                        position: "fixed",
+                        bottom: 20,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        zIndex: 3,
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        startIcon={showMap ? <GridViewIcon /> : <MapIcon />}
+                        onClick={() => setShowMap(!showMap)}
+                        sx={{
+                            bgcolor: "black",
+                            color: "white",
+                            borderRadius: "30px",
+                            px: 3,
+                            py: 1.5,
+                            textTransform: "none",
+                            boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                            "&:hover": {
+                                bgcolor: "#333"
+                            }
+                        }}
+                    >
+                        {showMap ? "Show list" : "Show map"}
+                    </Button>
+                </Box>
+            )}
+        </Box>
     )
 }
 

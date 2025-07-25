@@ -46,12 +46,18 @@ const PropertyPage: React.FC = () => {
     if (!property) return <div>Property not found</div>;
 
     return (
-        <Container sx={{ py: 5 }}>
+        <Container sx={{
+            py: {
+                xs: 3,
+                sm: 4,
+                md: 5,
+            }
+        }}>
             {/* Header */}
             <HeaderSection
                 placeName={property.place_name}
-                isFavorite={isFavorite}
-                toggleFavorite={toggleFavorite}
+            // isFavorite={isFavorite}
+            // toggleFavorite={toggleFavorite}
             />
 
             {/* Photo Gallery */}
@@ -69,7 +75,12 @@ const PropertyPage: React.FC = () => {
                 position="relative"
             >
 
-                <Box >
+                <Box sx={{
+                    // width: {
+                    //     sm: "100%",
+                    //     md: "auto"
+                    // }
+                }}>
                     <PropertyDetailsSection
                         details={property.details}
                         rating={property.rating}
@@ -78,17 +89,34 @@ const PropertyPage: React.FC = () => {
 
                     <Divider sx={{ mb: 6 }} />
 
-                    <Box>
-                        <Typography variant="h5" fontWeight={600} mb={1}>
-                            Select checkout date                        </Typography>
-                        <Typography variant="body1" color="text.secondary" >
+                    <Box >
+                        <Typography variant="h5" fontWeight={600} mb={1}
+                            sx={{
+                                fontSize: {
+                                    xs: "1.15rem",
+                                    sm: "1.25rem",
+                                    md: "1.75rem",
+                                    lg: "2rem",
+                                },
+                            }}>
+                            Select checkout date
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary" sx={{
+                            fontSize: {
+                                xs: "14.5px",
+                                sm: "15px",
+                                md: "16px",
+                            },
+                        }}>
                             Select checkout date
                         </Typography>
 
-                        <Calendar
-                            value={dateRange}
-                            onChange={handleChange}
-                        />
+                        <Box sx={{ width: "100%" }}>
+                            <Calendar
+                                value={dateRange}
+                                onChange={handleChange}
+                            />
+                        </Box>
 
                     </Box>
                 </Box>

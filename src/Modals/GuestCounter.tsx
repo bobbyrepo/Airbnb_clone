@@ -33,8 +33,20 @@ const GuestCounter: React.FC<GuestCounterProps> = ({ guestCount, onChange }) => 
                 <Box key={key}>
                     <Box display="flex" justifyContent="space-between" alignItems="center" py={2}>
                         <Box>
-                            <Typography fontWeight={600}>{label}</Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography fontWeight={600} sx={{
+                                fontSize: {
+                                    xs: 14,
+                                    sm: 15,
+                                    md: 16,
+                                }
+                            }}>{label}</Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{
+                                fontSize: {
+                                    xs: 13,
+                                    sm: 14,
+                                    md: 15,
+                                }
+                            }}>
                                 {sub}
                             </Typography>
                         </Box>
@@ -45,8 +57,16 @@ const GuestCounter: React.FC<GuestCounterProps> = ({ guestCount, onChange }) => 
                                 disabled={guestCount[key] <= 0}
                                 sx={{
                                     border: "1px solid #ddd",
-                                    width: 32,
-                                    height: 32,
+                                    width: {
+                                        xs: 25,
+                                        sm: 29,
+                                        md: 32,
+                                    },
+                                    height: {
+                                        xs: 25,
+                                        sm: 29,
+                                        md: 32,
+                                    },
                                     "&:disabled": {
                                         borderColor: "#f0f0f0",
                                         color: "#ccc",
@@ -64,8 +84,16 @@ const GuestCounter: React.FC<GuestCounterProps> = ({ guestCount, onChange }) => 
                                 onClick={() => onChange(key, 1)}
                                 sx={{
                                     border: "1px solid #ddd",
-                                    width: 32,
-                                    height: 32,
+                                    width: {
+                                        xs: 25,
+                                        sm: 29,
+                                        md: 32,
+                                    },
+                                    height: {
+                                        xs: 25,
+                                        sm: 29,
+                                        md: 32,
+                                    },
                                 }}
                             >
                                 <AddIcon fontSize="small" />

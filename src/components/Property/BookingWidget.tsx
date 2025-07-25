@@ -110,7 +110,13 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
         }}>
             <Box sx={{ p: 3 }}>
                 <Box sx={{ display: "flex", alignItems: "baseline", gap: 1, mb: 3, flexWrap: "wrap" }}>
-                    <Typography variant="h5" fontWeight={600} sx={{ textDecoration: "underline" }}>
+                    <Typography variant="h5" fontWeight={600} sx={{
+                        fontSize: {
+                            xs: "20px",
+                            sm: "23px",
+                            md: "24px",
+                        }, textDecoration: "underline"
+                    }}>
                         ${totalPrice}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
@@ -132,7 +138,7 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                 >
                     <Box sx={{ border: "1px solid #ddd", borderRadius: "8px", overflow: "hidden", cursor: "pointer" }}                    >
                         {/* Check-in and Check-out */}
-                        <Box sx={{ display: "flex", width: "350px" }}
+                        <Box sx={{ display: "flex", maxWidth: "350px" }}
                             onClick={() => setShowCalendar((prev) => !prev)}
                         >
                             <Box sx={{ flex: 1, borderRight: "1px solid #ddd" }}>
@@ -143,8 +149,11 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                                     sx={{
                                         px: 2,
                                         mb: 1,
-                                        border: "1px solid transparent",
-                                        fontSize: 16,
+                                        fontSize: {
+                                            xs: 14,
+                                            sm: 15,
+                                            md: 16,
+                                        },
                                         fontWeight: 500,
                                         color: checkOut ? "text.primary" : "text.secondary",
                                     }}
@@ -160,8 +169,11 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                                     sx={{
                                         px: 2,
                                         mb: 1,
-                                        border: "1px solid transparent",
-                                        fontSize: 16,
+                                        fontSize: {
+                                            xs: 14,
+                                            sm: 15,
+                                            md: 16,
+                                        },
                                         fontWeight: 500,
                                         color: checkOut ? "text.primary" : "text.secondary",
                                     }}
@@ -199,7 +211,13 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                             </GuestsHeader>
                         </GuestsContainer>
 
-                        <Collapse in={guestsOpen} sx={{ px: 4 }}>
+                        <Collapse in={guestsOpen} sx={{
+                            px: {
+                                xs: 2,
+                                sm: 3,
+                                md: 4,
+                            }
+                        }}>
                             <GuestCounter guestCount={guestCount} onChange={handleGuestCountChange} />
                         </Collapse>
                     </Box>
@@ -212,11 +230,17 @@ const BookingWidget: React.FC<Props> = ({ id, price, guestLabel, dateRange, setD
                     <ReserveButton fullWidth size="large">Reserve</ReserveButton>
                 </Link>
 
-                <Typography variant="body2" color="text.secondary" textAlign="center" sx={{ mt: 2 }}>
+                <Typography variant="body2" color="text.secondary" textAlign="center" sx={{
+                    mt: 2,
+                    fontSize: {
+                        xs: 14,
+                        md: 15,
+                    }
+                }}>
                     You won't be charged yet
                 </Typography>
             </Box>
-        </Card>
+        </Card >
     );
 }
 

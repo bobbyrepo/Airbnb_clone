@@ -24,7 +24,18 @@ const ReviewsSection: React.FC<Props> = ({ reviews }) => {
 
     return (
         <Box>
-            <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
+            <Typography variant="h6" fontWeight={600} sx={{
+                mb: {
+                    xs: 1,
+                    sm: 2,
+                    md: 3
+                },
+                fontSize: {
+                    xs: "18px",
+                    sm: "20px",
+                    md: "22px",
+                },
+            }}>
                 Reviews
             </Typography>
 

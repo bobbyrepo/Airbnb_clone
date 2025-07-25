@@ -155,8 +155,13 @@ const SearchBar = () => {
                             bgcolor: "background.paper",
                             borderRadius: 10,
                             boxShadow: 24,
-                            p: 3,
-                            px: 7
+                            py: 3,
+                            px: {
+                                xs: 3,
+                                sm: 5,
+                                md: 7
+                            },
+                            mx: 3,
                         }}
                     >
                         {/* <Stepper activeStep={activeStep} alternativeLabel>

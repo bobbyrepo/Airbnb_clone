@@ -38,7 +38,13 @@ const CalendarSelector: React.FC<CalendarSelectorProps> = ({
 
     return (
         <Box>
-            <Typography variant="h5" textAlign={align} fontWeight={600} mb={1}>
+            <Typography variant="h5" textAlign={align} fontWeight={600} mb={1} sx={{
+                fontSize: {
+                    xs: 20,
+                    sm: 22,
+                    md: 24,
+                }
+            }}>
                 {heading1}
             </Typography>
             <Typography variant="body2" textAlign={align} color="text.secondary" mb={3}>

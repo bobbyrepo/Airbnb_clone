@@ -19,7 +19,13 @@ const LocationSelector = ({ setLocation, location }: LocationSelectorProps) => {
     // console.log(location)
     return (
         <>
-            <Typography variant="h6">Where are you going?</Typography>
+            <Typography variant="h6" sx={{
+                fontSize: {
+                    xs: 18,
+                    sm: 19,
+                    md: 20,
+                }
+            }}>Where are you going?</Typography>
             {/* <List
                 sx={{
                     maxHeight: 300,       // Set desired max height

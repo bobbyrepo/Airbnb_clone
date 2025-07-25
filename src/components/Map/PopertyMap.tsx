@@ -27,10 +27,24 @@ const PropertyMap: React.FC<PropertyMapProps> = ({ property }) => {
             {/* Header */}
 
             <Box sx={{ p: 3, backgroundColor: "white" }}>
-                <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
+                <Typography variant="h5" sx={{
+                    fontSize: {
+                        xs: "1.15rem",
+                        sm: "1.25rem",
+                        md: "1.75rem",
+                        lg: "2rem",
+                    }, fontWeight: 600, mb: 1
+                }}>
                     Where you'll be
                 </Typography>
-                <Typography variant="h6" color="text.secondary">
+                <Typography sx={{
+                    fontSize: {
+                        xs: "1rem",
+                        sm: "1.1rem",
+                        md: "1.2rem",
+                        lg: "1.4rem",
+                    },
+                }} variant="h6" color="text.secondary">
                     {(property.details.location.city + ", " + property.details.location.country) || "Property Location"}
                 </Typography>
             </Box>

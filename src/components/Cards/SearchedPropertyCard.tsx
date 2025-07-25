@@ -86,7 +86,7 @@ const SearchedPropertyCardComponent: React.FC<{ property: Property }> = ({ prope
                         alt={`${property.place_name} - Image ${currentImageIndex + 1}`}
                         style={{
                             width: "100%",
-                            height: 220,
+                            aspectRatio: 1 / 1,
                             objectFit: "cover",
                             borderRadius: "20px",
                         }}
